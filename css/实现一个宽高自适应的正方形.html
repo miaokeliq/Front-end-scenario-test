@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现一个宽高自适应的正方形</title>
+    <style>
+      .div1 {
+        width: 10%;
+        height: 10vw;
+        background-color: tomato;
+      }
+
+      .div2 {
+        width: 20%;
+        height: 0;
+        padding-top: 20%;
+        background-color: orange;
+      }
+
+      .div3 {
+        width: 30%;
+        overflow: hidden;
+        background: yellow;
+      }
+      .div3::after {
+        content: "";
+        display: block;
+        margin-top: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        总体思路：由于height是不固定的，所以不能直接使用height的值。因此转换思路使用width值来实现正方形的height赋值。
+        所以卢纶上只要能够将宽度属性应用在高度属性的方法都可以。
+    -->
+
+    <!-- 利用vw来实现
+        width: 10%;      将宽度设置为视窗宽度的10%
+        height: 10vw;    vw是一种视窗单位，也是相对单位，相对于视窗的宽度， 10vw相当于当前视窗宽度的百分之十。
+        这样宽度高度都是视窗宽度的百分之十，也就是自适应了。
+    -->
+    <div class="div1"></div>
+
+    <!-- 
+        利用元素的margin/padding百分比是相对父元素width的性质来实现：
+        width: 20%;
+        height: 0;
+        padding-top: 20%;   padding的百分比是相对于父元素宽度。
+    -->
+    <div class="div2"></div>
+
+    <!-- 
+        利用子元素的margin-top的值来实现
+  .div3::after {
+        content: "";
+        display: block;
+        margin-top: 100%;
+      }
+
+      伪元素after是div3的子元素， margin-top的百分比时的边距时基于父元素的宽度来计算的，100%就跟父元素的宽度一样，将父元素撑开了
+
+    -->
+    <div class="div3"></div>
+  </body>
+</html>
