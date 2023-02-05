@@ -5,6 +5,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>实现一个三角形</title>
+    <style>
+      .div1 {
+        width: 0;
+        height: 0;
+        border: 100px solid;
+        border-color: orange blue red green;
+      }
+
+      .div2 {
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-top: 50px solid red;
+        border-left: 50px solid transparent; /*transparent 表示全透明*/
+        border-right: 50px solid transparent;
+      }
+      .div3 {
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-bottom: 50px solid red;
+        border-left: 50px solid transparent; /*transparent 表示全透明*/
+        border-right: 50px solid transparent;
+      }
+      .div4 {
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-left: 100px solid red;
+        border-top: 100px solid transparent; /*transparent 表示全透明*/
+        border-bottom: 100px solid transparent;
+      }
+      .div5 {
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-right: 200px solid red;
+        border-top: 50px solid transparent; /*transparent 表示全透明*/
+        border-bottom: 50px solid transparent;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <!-- CSS绘制三角形主要用到的是border属性，也就是边框
+        平时在给盒子设置边框时，往往都设置很窄，就可能误以为边框是由矩形形成的。实际上，border属性是由右三角形组成的，下面看一个例子（.div1）
+        将元素的长宽都设置为0，显示出来的效果就会是div1
+    -->
+    <div class="div1"></div>
+
+    <!-- 所以可以根据border这个特性来绘制三角形，
+        例如三角形1 （.div2）
+    -->
+    <span>三角形1：</span>
+    <div class="div2"></div>
+
+    <span>三角形2：</span>
+    <div class="div3"></div>
+
+    <span>三角形3：</span>
+    <div class="div4"></div>
+
+    <span>三角形4：</span>
+    <div class="div5"></div>
+
+    <!-- 还有很多，就不一一实现了。总体的原则就是通过上下左右边框来控制三角形的方向，用边框的宽度比来控制三角形的角度。 -->
+  </body>
 </html>
