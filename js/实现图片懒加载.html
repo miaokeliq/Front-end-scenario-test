@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>图片懒加载</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/183679/11/2189/143829/6091f5d8E933e7ad1/e3e2001666f2ce7b.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img14.360buyimg.com/n7/jfs/t1/119501/15/6768/115886/5eca6c36Eb3541dc9/2f4534173878a23c.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img13.360buyimg.com/n7/jfs/t1/190093/28/117/193777/60867822Ea949fbec/6fe51b122d0fdc5a.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/165930/8/7273/171076/602fd5dfE65a52775/ee27074b7037c020.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/148370/31/1084/45848/5eedc2eeEfdc2cd46/f3c3a6f0bd7998be.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/110754/4/12605/101916/5ee43244E6fbf9433/c42fb5e3f9558a59.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/173986/31/8862/291849/6098d6d0E26c55012/c2144f6e074556d2.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img14.360buyimg.com/n7/jfs/t1/100888/13/13132/105320/5e5533c6Ea8daa487/f95d7ba4da5581c5.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img10.360buyimg.com/n7/jfs/t1/130179/12/9273/167054/5f5468edE9d4ecd9c/39f7520d9f76b695.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img14.360buyimg.com/n7/jfs/t1/156161/35/18802/268242/60641d96Eca3dee7f/4a32070a19deb4f5.jpg"
+          alt="加载中..."
+        />
+      </div>
+      <div class="img">
+        <img
+          data-src="https://img12.360buyimg.com/n7/jfs/t1/192682/11/617/163213/608b887aEddbbbee3/9570466a90d02f79.jpg"
+          alt="加载中..."
+        />
+      </div>
+    </div>
+
+    <script>
+      const imgList = document.querySelectorAll("img");
+      let index = 0;
+      function lazyload() {
+        // 获取浏览器窗口高度
+        const viewPortHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        for (let i = index; i < imgList.length; i++) {
+          const distance =
+            viewPortHeight - imgList[i].getBoundingClientRect().top;
+          if (distance > 0) {
+            imgList[i].src = imgList[i].getAttribute("data-src");
+            index = i + 1;
+          }
+        }
+      }
+
+      window.onload = lazyload;
+
+      window.addEventListener("scroll", throttle(lazyload, 500, 1000));
+      window.addEventListener("resize", lazyload);
+
+      // 节流防抖优化
+      // 如果在一段时间内 scroll 触发的间隔一只短于 500ms，那么能保证我们希望调用的事件至少在 1000ms 内会触发一次
+      function throttle(fn, delay, mustrun) {
+        let pre = 0;
+        let timer;
+        return function () {
+          let context = this;
+          let args = arguments;
+          let now = new Date();
+          if (now - pre >= mustrun) {
+            fn.apply(fn, args);
+            pre = now;
+          } else {
+            clearTimeout(timer);
+            setTimeout(function () {
+              fn.apply(context, args);
+            }, delay);
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
