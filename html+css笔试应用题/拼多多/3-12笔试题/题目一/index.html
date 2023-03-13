@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="welcome"></div>
+  </body>
+
+  <script>
+    function generateAndInsertContent() {
+      let welcome = document.querySelector("#welcome");
+      let { year, day, nextYearDay } = getInfo();
+
+      let str = `今天是${year}年的第<span style="color:red">
+        ${day}
+      </span>天，`;
+
+      if (day <= 180) {
+        str += "你好，上半年！";
+      } else if (day > 180 && day <= nextYearDay) {
+        str += "再见了，上半年！你好，下半年！";
+      }
+      welcome.innerHTML = str;
+    }
+
+    function getInfo() {
+      let nowTime = new Date().getTime();
+      let preTime = new Date("2020-1-1").getTime();
+      let dayTime = 1000 * 60 * 60 * 24;
+      let year = 2020 + Math.floor((nowTime - preTime) / (dayTime * 365));
+      let yearTime = new Date(`${year}-1-1`).getTime();
+      let day = Math.floor((nowTime - yearTime) / dayTime);
+      let nextYear = year + 1;
+      let nextYearTime = new Date(`${nextYear}-1-1`).getTime();
+      let nextYearDay = Math.floor((nextYearTime - yearTime) / dayTime);
+      let dayObj = {
+        year,
+        day,
+        nextYearDay,
+      };
+      return dayObj;
+    }
+
+    generateAndInsertContent();
+  </script>
+</html>

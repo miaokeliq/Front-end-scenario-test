@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      #card {
+        width: 256px;
+        height: 256px;
+        background: #f4f4f4;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #quickBtn {
+        box-sizing: border-box;
+        width: 92px;
+        height: 27px;
+        padding: 5px;
+        background-color: white;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        visibility: hidden;
+      }
+
+      #card:hover #quickBtn {
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="card" onclick="cardClick()">
+      <div id="quickBtn" onclick="btnClick(event)">quick look</div>
+    </div>
+  </body>
+
+  <script>
+    function cardClick(e) {
+      alert("card click");
+    }
+    function btnClick(e) {
+      e.stopPropagation();
+      alert("quick look click");
+    }
+  </script>
+</html>
